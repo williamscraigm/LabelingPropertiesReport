@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.ArcMapUI;
 using ESRI.ArcGIS.ArcMap;
@@ -20,16 +21,23 @@ namespace LabelingPropertiesReport
             IMaps maps = mxd.Maps;
             int mapCount = maps.Count;
 
-            string folderPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string docFolderPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string MapDocName = Path.GetFileNameWithoutExtension(ArcMap.Application.Document.Title);
-            string path = folderPath + "\\LabelingReport\\" + MapDocName + ".log";
+            string folderPath = docFolderPath + "\\LabelingReport\\";
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string path = folderPath + MapDocName + ".log";
             if (File.Exists(path))
             {
                 File.Delete(path);
             }
 
-            TextWriter tw = new StreamWriter(path);
-            StreamWriter sw = tw as StreamWriter;
+            StreamWriter sw = new StreamWriter(path, false);
+            TextWriter tw = sw as TextWriter;
+           
             sw.AutoFlush = true;
 
             tw.WriteLine(GetFieldColumns());
@@ -41,6 +49,8 @@ namespace LabelingPropertiesReport
             }
 
             tw.Close();
+
+            MessageBox.Show("Report generated at: " + path, "Labeling Report", MessageBoxButtons.OK);
             ArcMap.Application.CurrentTool = null;
         }
         private static void ProcessMap(IMap map, TextWriter tw)
@@ -52,6 +62,7 @@ namespace LabelingPropertiesReport
             if (maplexOverposterProps == null)
             {
                 tw.WriteLine("Skipped Standard Label Engine Map: " + map.Name + ",");
+                return;
             }
 
             ESRI.ArcGIS.esriSystem.UID flUID = new ESRI.ArcGIS.esriSystem.UIDClass();
