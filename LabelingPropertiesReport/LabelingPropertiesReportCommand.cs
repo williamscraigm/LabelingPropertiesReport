@@ -29,7 +29,7 @@ namespace LabelingPropertiesReport
                 Directory.CreateDirectory(folderPath);
             }
 
-            string path = folderPath + MapDocName + ".log";
+            string path = folderPath + MapDocName + ".csv";
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -105,15 +105,15 @@ namespace LabelingPropertiesReport
 
             ILabelEngineLayerProperties2 labelEngineLP = annoLP as ILabelEngineLayerProperties2;
 
-            stringBuild.Append(mapName); //Map name
-            stringBuild.Append("," + layerName); //Layer name
-            stringBuild.Append("," + annoLP.Class); //Label class name
-            stringBuild.Append("," + annoLP.WhereClause); //Where clause
-            stringBuild.Append("," + annoLP.AnnotationMaximumScale); //Max scale
-            stringBuild.Append("," + annoLP.AnnotationMinimumScale); //Min scale
-            stringBuild.Append("," + labelEngineLP.ExpressionParser.Name); //Expression Parser
-            stringBuild.Append("," + labelEngineLP.Expression); //Expression
-            stringBuild.Append("," + labelEngineLP.Offset); //Offset
+            stringBuild.Append(CSV.Escape(mapName)); //Map name
+            stringBuild.Append("," + CSV.Escape(layerName)); //Layer name
+            stringBuild.Append("," + CSV.Escape(annoLP.Class)); //Label class name
+            stringBuild.Append("," + CSV.Escape(annoLP.WhereClause)); //Where clause
+            stringBuild.Append("," + CSV.Escape(annoLP.AnnotationMaximumScale)); //Max scale
+            stringBuild.Append("," + CSV.Escape(annoLP.AnnotationMinimumScale)); //Min scale
+            stringBuild.Append("," + CSV.Escape(labelEngineLP.ExpressionParser.Name)); //Expression Parser
+            stringBuild.Append("," + CSV.Escape(labelEngineLP.Expression)); //Expression
+            stringBuild.Append("," + CSV.Escape(labelEngineLP.Offset)); //Offset
 
             IMaplexOverposterLayerProperties maplexOverposter = labelEngineLP.OverposterLayerProperties as IMaplexOverposterLayerProperties;
             if (maplexOverposter != null)
@@ -123,35 +123,35 @@ namespace LabelingPropertiesReport
                 IMaplexOverposterLayerProperties3 maplexOverposter3 = maplexOverposter as IMaplexOverposterLayerProperties3;
                 IMaplexOverposterLayerProperties4 maplexOverposter4 = maplexOverposter as IMaplexOverposterLayerProperties4;
 
-                stringBuild.Append("," + maplexOverposter.AlignLabelToLineDirection); //AlignLabelToLineDirection
-                stringBuild.Append("," + maplexOverposter.AllowAsymmetricOverrun); //AllowAsymmetricOverrun
-                stringBuild.Append("," + maplexOverposter.BackgroundLabel); //BackgroundLabel
-                stringBuild.Append("," + maplexOverposter.CanAbbreviateLabel); //CanAbbreviateLabel
-                stringBuild.Append("," + maplexOverposter.CanOverrunFeature); //CanOverrunFeature
-                stringBuild.Append("," + maplexOverposter.CanPlaceLabelOutsidePolygon); //CanPlaceLabelOutsidePolygon
-                stringBuild.Append("," + maplexOverposter.CanReduceFontSize); //CanReduceFontSize
-                stringBuild.Append("," + maplexOverposter.CanRemoveOverlappingLabel); //CanRemoveOverlappingLabel
-                stringBuild.Append("," + maplexOverposter.CanShiftPointLabel); //CanShiftPointLabel
-                stringBuild.Append("," + maplexOverposter.CanStackLabel); //CanStackLabel
-                stringBuild.Append("," + maplexOverposter.CanTruncateLabel); //CanTruncateLabel
-                stringBuild.Append("," + maplexOverposter.ConstrainOffset); //ConstrainOffset
-                stringBuild.Append("," + maplexOverposter.DictionaryName); //DictionaryName
-                stringBuild.Append("," + maplexOverposter.EnablePointPlacementPriorities); //EnablePointPlacementPriorities
-                stringBuild.Append("," + maplexOverposter.FeatureBuffer); //FeatureBuffer
-                stringBuild.Append("," + maplexOverposter.FeatureType); //FeatureType
-                stringBuild.Append("," + maplexOverposter.FeatureWeight); //FeatureWeight
-                stringBuild.Append("," + maplexOverposter.FontHeightReductionLimit); //FontHeightReductionLimit
-                stringBuild.Append("," + maplexOverposter.FontHeightReductionStep); //FontHeightReductionStep
-                stringBuild.Append("," + maplexOverposter.FontWidthReductionLimit); //FontWidthReductionLimit
-                stringBuild.Append("," + maplexOverposter.FontWidthReductionStep); //FontWidthReductionStep
-                stringBuild.Append("," + maplexOverposter.GraticuleAlignment); //GraticuleAlignment
-                stringBuild.Append("," + maplexOverposter.IsStreetPlacement); //IsStreetPlacement
-                stringBuild.Append("," + maplexOverposter.LabelBuffer); //LabelBuffer
-                stringBuild.Append("," + maplexOverposter.LabelPriority); //LabelPriority
-                stringBuild.Append("," + maplexOverposter.LabelStackingProperties.StackJustification); //LabelStackingProperties (Horizontal Alignment)
-                stringBuild.Append("," + maplexOverposter.LabelStackingProperties.MaximumNumberOfLines); //LabelStackingProperties (Maximum Number Of Lines)
-                stringBuild.Append("," + maplexOverposter.LabelStackingProperties.MaximumNumberOfCharsPerLine); //LabelStackingProperties (Maximum Number Of Chars Per Line)
-                stringBuild.Append("," + maplexOverposter.LabelStackingProperties.MinimumNumberOfCharsPerLine); //LabelStackingProperties (Minimum Number Of Chars Per Line)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.AlignLabelToLineDirection)); //AlignLabelToLineDirection
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.AllowAsymmetricOverrun)); //AllowAsymmetricOverrun
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.BackgroundLabel)); //BackgroundLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanAbbreviateLabel)); //CanAbbreviateLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanOverrunFeature)); //CanOverrunFeature
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanPlaceLabelOutsidePolygon)); //CanPlaceLabelOutsidePolygon
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanReduceFontSize)); //CanReduceFontSize
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanRemoveOverlappingLabel)); //CanRemoveOverlappingLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanShiftPointLabel)); //CanShiftPointLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanStackLabel)); //CanStackLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanTruncateLabel)); //CanTruncateLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.ConstrainOffset)); //ConstrainOffset
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.DictionaryName)); //DictionaryName
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.EnablePointPlacementPriorities)); //EnablePointPlacementPriorities
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureBuffer)); //FeatureBuffer
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureType)); //FeatureType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureWeight)); //FeatureWeight
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontHeightReductionLimit)); //FontHeightReductionLimit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontHeightReductionStep)); //FontHeightReductionStep
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontWidthReductionLimit)); //FontWidthReductionLimit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontWidthReductionStep)); //FontWidthReductionStep
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.GraticuleAlignment)); //GraticuleAlignment
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.IsStreetPlacement)); //IsStreetPlacement
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelBuffer)); //LabelBuffer
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelPriority)); //LabelPriority
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.StackJustification)); //LabelStackingProperties (Horizontal Alignment)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MaximumNumberOfLines)); //LabelStackingProperties (Maximum Number Of Lines)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MaximumNumberOfCharsPerLine)); //LabelStackingProperties (Maximum Number Of Chars Per Line)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MinimumNumberOfCharsPerLine)); //LabelStackingProperties (Minimum Number Of Chars Per Line)
 
                 IMaplexLabelStackingProperties stackingProps = maplexOverposter.LabelStackingProperties;
                 for (int i = 0; i < 5; i++)
@@ -163,125 +163,125 @@ namespace LabelingPropertiesReport
                         string separator = "";
                         stackingProps.QuerySeparator(i, out separator, out Visible, out splitForced, out splitAfter);
                         separatorPrint = String.Format("U+{0:X4} ", Convert.ToUInt16(separator[0]));
-                        stringBuild.Append("," + "" + separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter + "");
+                        stringBuild.Append("," + CSV.Escape(separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter));
                     }
                     else //just print the remaining chars as nulls
                     {
                         separatorPrint = "null";
-                        stringBuild.Append("," + "" + separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter + "");
+                        stringBuild.Append("," + CSV.Escape(separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter));
                     }
                 }
 
-                stringBuild.Append("," + maplexOverposter.LandParcelPlacement); //LandParcelPlacement
-                stringBuild.Append("," + maplexOverposter.LinePlacementMethod); //LinePlacementMethod
-                stringBuild.Append("," + maplexOverposter.MaximumCharacterSpacing); //MaximumCharacterSpacing
-                stringBuild.Append("," + maplexOverposter.MaximumLabelOverrun); //MaximumLabelOverrun
-                stringBuild.Append("," + maplexOverposter.MaximumWordSpacing); //MaximumWordSpacing
-                stringBuild.Append("," + maplexOverposter.MinimumEndOfStreetClearance); //MinimumEndOfStreetClearance
-                stringBuild.Append("," + maplexOverposter.MinimumRepetitionInterval); //MinimumRepetitionInterval
-                stringBuild.Append("," + maplexOverposter.MinimumSizeForLabeling); //MinimumSizeForLabeling
-                stringBuild.Append("," + maplexOverposter.NeverRemoveLabel); //NeverRemoveLabel
-                stringBuild.Append("," + maplexOverposter.OffsetAlongLineProperties.Distance); //OffsetAlongLineProperties (Distance)
-                stringBuild.Append("," + maplexOverposter.OffsetAlongLineProperties.DistanceUnit); //OffsetAlongLineProperties (Distance Unit)
-                stringBuild.Append("," + maplexOverposter.OffsetAlongLineProperties.LabelAnchorPoint); //OffsetAlongLineProperties (Label Anchor Point)
-                stringBuild.Append("," + maplexOverposter.OffsetAlongLineProperties.PlacementMethod); //OffsetAlongLineProperties (Placement Method)
-                stringBuild.Append("," + maplexOverposter.OffsetAlongLineProperties.Tolerance); //OffsetAlongLineProperties (Tolerance)
-                stringBuild.Append("," + maplexOverposter.OffsetAlongLineProperties.UseLineDirection); //OffsetAlongLineProperties (Use Line Direction)
-                stringBuild.Append("," + maplexOverposter.PointPlacementMethod); //PointPlacementMethod
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.AboveLeft); //PointPlacementPriorities (Above Left)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.AboveCenter); //PointPlacementPriorities (Above Center)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.AboveRight); //PointPlacementPriorities (Above Right)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.CenterLeft); //PointPlacementPriorities (Center Left)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.CenterRight); //PointPlacementPriorities (Center Right)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.BelowLeft); //PointPlacementPriorities (Below Left)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.BelowCenter); //PointPlacementPriorities (Below Center)
-                stringBuild.Append("," + maplexOverposter.PointPlacementPriorities.BelowRight); //PointPlacementPriorities (Below Right)
-                stringBuild.Append("," + maplexOverposter.PolygonBoundaryWeight); //PolygonBoundaryWeight
-                stringBuild.Append("," + maplexOverposter.PolygonPlacementMethod); //PolygonPlacementMethod
-                stringBuild.Append("," + maplexOverposter.PreferHorizontalPlacement); //PreferHorizontalPlacement
-                stringBuild.Append("," + maplexOverposter.PreferredEndOfStreetClearance); //PreferredEndOfStreetClearance
-                stringBuild.Append("," + maplexOverposter.PrimaryOffset); //PrimaryOffset
-                stringBuild.Append("," + maplexOverposter.PrimaryOffsetUnit); //PrimaryOffsetUnit
-                stringBuild.Append("," + maplexOverposter.RepeatLabel); //RepeatLabel
-                stringBuild.Append("," + maplexOverposter.MinimumRepetitionInterval); //Minimum Repetition Interval
-                stringBuild.Append("," + maplexOverposter.RotationProperties.AlignLabelToAngle); //RotationProperties (AlignLabelToAngle)
-                stringBuild.Append("," + maplexOverposter.RotationProperties.Enable); //RotationProperties (Enable)
-                stringBuild.Append("," + maplexOverposter.RotationProperties.PerpendicularToAngle); //RotationProperties (PerpendicularToAngle)
-                stringBuild.Append("," + maplexOverposter.RotationProperties.RotationField); //RotationProperties (RotationField)
-                stringBuild.Append("," + maplexOverposter.RotationProperties.RotationType); //RotationProperties (RotationType)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LandParcelPlacement)); //LandParcelPlacement
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LinePlacementMethod)); //LinePlacementMethod
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MaximumCharacterSpacing)); //MaximumCharacterSpacing
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MaximumLabelOverrun)); //MaximumLabelOverrun
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MaximumWordSpacing)); //MaximumWordSpacing
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumEndOfStreetClearance)); //MinimumEndOfStreetClearance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumRepetitionInterval)); //MinimumRepetitionInterval
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumSizeForLabeling)); //MinimumSizeForLabeling
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.NeverRemoveLabel)); //NeverRemoveLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.OffsetAlongLineProperties.Distance)); //OffsetAlongLineProperties (Distance)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.OffsetAlongLineProperties.DistanceUnit)); //OffsetAlongLineProperties (Distance Unit)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.OffsetAlongLineProperties.LabelAnchorPoint)); //OffsetAlongLineProperties (Label Anchor Point)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.OffsetAlongLineProperties.PlacementMethod)); //OffsetAlongLineProperties (Placement Method)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.OffsetAlongLineProperties.Tolerance)); //OffsetAlongLineProperties (Tolerance)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.OffsetAlongLineProperties.UseLineDirection)); //OffsetAlongLineProperties (Use Line Direction)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementMethod)); //PointPlacementMethod
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.AboveLeft)); //PointPlacementPriorities (Above Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.AboveCenter)); //PointPlacementPriorities (Above Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.AboveRight)); //PointPlacementPriorities (Above Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.CenterLeft)); //PointPlacementPriorities (Center Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.CenterRight)); //PointPlacementPriorities (Center Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.BelowLeft)); //PointPlacementPriorities (Below Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.BelowCenter)); //PointPlacementPriorities (Below Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementPriorities.BelowRight)); //PointPlacementPriorities (Below Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PolygonBoundaryWeight)); //PolygonBoundaryWeight
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PolygonPlacementMethod)); //PolygonPlacementMethod
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PreferHorizontalPlacement)); //PreferHorizontalPlacement
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PreferredEndOfStreetClearance)); //PreferredEndOfStreetClearance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PrimaryOffset)); //PrimaryOffset
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PrimaryOffsetUnit)); //PrimaryOffsetUnit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RepeatLabel)); //RepeatLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumRepetitionInterval)); //Minimum Repetition Interval
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RotationProperties.AlignLabelToAngle)); //RotationProperties (AlignLabelToAngle)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RotationProperties.Enable)); //RotationProperties (Enable)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RotationProperties.PerpendicularToAngle)); //RotationProperties (PerpendicularToAngle)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RotationProperties.RotationField)); //RotationProperties (RotationField)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RotationProperties.RotationType)); //RotationProperties (RotationType)
                 IMaplexRotationProperties2 maplexRotationProperties2 = maplexOverposter.RotationProperties as IMaplexRotationProperties2;
-                stringBuild.Append("," + maplexRotationProperties2.AdditionalAngle); //RotationProperties (AdditionalAngle)
-                stringBuild.Append("," + maplexRotationProperties2.AlignmentType); //RotationProperties (AlignmentType)
-                stringBuild.Append("," + maplexOverposter.SecondaryOffset); //SecondaryOffset
-                stringBuild.Append("," + maplexOverposter.SpreadCharacters); //SpreadCharacters
-                stringBuild.Append("," + maplexOverposter.SpreadWords); //SpreadWords
-                stringBuild.Append("," + maplexOverposter.ThinDuplicateLabels); //ThinDuplicateLabels
-                stringBuild.Append("," + maplexOverposter.ThinningDistance); //ThinningDistance
-                stringBuild.Append("," + maplexOverposter2.CanFlipStackedStreetLabel); //CanFlipStackedStreetLabel
-                stringBuild.Append("," + maplexOverposter2.CanPlaceLabelOnTopOfFeature); //CanPlaceLabelOnTopOfFeature
-                stringBuild.Append("," + maplexOverposter2.CanReduceLeading); //CanReduceLeading
-                stringBuild.Append("," + maplexOverposter2.ContourAlignmentType); //ContourAlignmentType
-                stringBuild.Append("," + maplexOverposter2.ContourLadderType); //ContourLadderType
-                stringBuild.Append("," + maplexOverposter2.ContourMaximumAngle); //ContourMaximumAngle
-                stringBuild.Append("," + maplexOverposter2.EnablePolygonFixedPosition); //EnablePolygonFixedPosition
-                stringBuild.Append("," + maplexOverposter2.EnableSecondaryOffset); //EnableSecondaryOffset
-                stringBuild.Append("," + maplexOverposter2.GraticuleAlignmentType); //GraticuleAlignmentType
-                stringBuild.Append("," + maplexOverposter2.IsLabelBufferHardConstraint); //IsLabelBufferHardConstraint
-                stringBuild.Append("," + maplexOverposter2.IsMinimumSizeBasedOnArea); //IsMinimumSizeBasedOnArea
-                stringBuild.Append("," + maplexOverposter2.IsOffsetFromFeatureGeometry); //IsOffsetFromFeatureGeometry
-                stringBuild.Append("," + maplexOverposter2.LineFeatureType); //LineFeatureType
-                stringBuild.Append("," + maplexOverposter2.MaximumLabelOverrunUnit); //MaximumLabelOverrunUnit
-                stringBuild.Append("," + maplexOverposter2.MinimumFeatureSizeUnit); //MinimumFeatureSizeUnit
-                stringBuild.Append("," + maplexOverposter2.PolygonAnchorPointType); //PolygonAnchorPointType
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexAboveLeft)); //PolygonExternalZones (Above Left)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexAboveCenter)); //PolygonExternalZones (Above Center)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexAboveRight)); //PolygonExternalZones (Above Right)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexCenterLeft)); //PolygonExternalZones (Center Left)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexCenter)); //PolygonExternalZones (Center)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexCenterRight)); //PolygonExternalZones (Center Right)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexBelowLeft)); //PolygonExternalZones (Below Left)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexBelowCenter)); //PolygonExternalZones (Below Center)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexBelowRight)); //PolygonExternalZones (Below Right)
-                stringBuild.Append("," + maplexOverposter2.PolygonFeatureType); //PolygonFeatureType
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexAboveLeft)); //PolygonInternalZones (Above Left)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexAboveCenter)); //PolygonInternalZones (Above Center)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexAboveRight)); //PolygonInternalZones (Above Right)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexCenterLeft)); //PolygonInternalZones (Center Left)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexCenter)); //PolygonInternalZones (Center)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexCenterRight)); //PolygonInternalZones (Center Right)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexBelowLeft)); //PolygonInternalZones (Below Left)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexBelowCenter)); //PolygonInternalZones (Below Center)
-                stringBuild.Append("," + maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexBelowRight)); //PolygonInternalZones (Below Right)
-                stringBuild.Append("," + maplexOverposter2.RepetitionIntervalUnit); //RepetitionIntervalUnit
-                stringBuild.Append("," + maplexOverposter2.SecondaryOffsetMaximum); //SecondaryOffsetMaximum
-                stringBuild.Append("," + maplexOverposter2.SecondaryOffsetMinimum); //SecondaryOffsetMinimum
-                stringBuild.Append("," + maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyStacking)); //StrategyPriority (Stacking)
-                stringBuild.Append("," + maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyOverrun)); //StrategyPriority (Overrun)
-                stringBuild.Append("," + maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontCompression)); //StrategyPriority (Font Compression)
-                stringBuild.Append("," + maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontReduction)); //StrategyPriority (Font Reduction)
-                stringBuild.Append("," + maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyAbbreviation)); //StrategyPriority (Abbreviation)
-                stringBuild.Append("," + maplexOverposter2.ThinningDistanceUnit); //ThinningDistanceUnit
-                stringBuild.Append("," + maplexOverposter3.AvoidPolygonHoles); //AvoidPolygonHoles
-                stringBuild.Append("," + maplexOverposter3.BoundaryLabelingAllowHoles); //BoundaryLabelingAllowHoles
-                stringBuild.Append("," + maplexOverposter3.BoundaryLabelingAllowSingleSided); //BoundaryLabelingAllowSingleSided
-                stringBuild.Append("," + maplexOverposter3.BoundaryLabelingSingleSidedOnLine); //BoundaryLabelingSingleSidedOnLine
-                stringBuild.Append("," + maplexOverposter4.AllowStraddleStacking); //AllowStraddleStacking
-                stringBuild.Append("," + maplexOverposter4.CanKeyNumberLabel); //CanKeyNumberLabel
-                stringBuild.Append("," + maplexOverposter4.ConnectionType); //ConnectionType
-                stringBuild.Append("," + maplexOverposter4.EnableConnection); //EnableConnection
-                stringBuild.Append("," + maplexOverposter4.KeyNumberGroupName); //KeyNumberGroupName
-                stringBuild.Append("," + maplexOverposter4.LabelLargestPolygon); //LabelLargestPolygon
-                stringBuild.Append("," + maplexOverposter4.MultiPartOption); //MultiPartOption
-                stringBuild.Append("," + maplexOverposter4.PreferLabelNearJunction); //PreferLabelNearJunction
-                stringBuild.Append("," + maplexOverposter4.PreferLabelNearJunctionClearance); //PreferLabelNearJunctionClearance
-                stringBuild.Append("," + maplexOverposter4.PreferLabelNearMapBorder); //PreferLabelNearMapBorder
-                stringBuild.Append("," + maplexOverposter4.PreferLabelNearMapBorderClearance); //PreferLabelNearMapBorderClearance
-                stringBuild.Append("," + maplexOverposter4.RemoveExtraLineBreaks); //RemoveExtraLineBreaks
-                stringBuild.Append("," + maplexOverposter4.RemoveExtraWhiteSpace); //RemoveExtraWhiteSpace
-                stringBuild.Append("," + maplexOverposter4.TruncationMarkerCharacter); //TruncationMarkerCharacter
-                stringBuild.Append("," + maplexOverposter4.TruncationMinimumLength); //TruncationMinimumLength
-                stringBuild.Append("," + maplexOverposter4.TruncationPreferredCharacters); //TruncationPreferredCharacters
-                stringBuild.Append("," + maplexOverposter4.UseExactSymbolOutline); //UseExactSymbolOutline
+                stringBuild.Append("," + CSV.Escape(maplexRotationProperties2.AdditionalAngle)); //RotationProperties (AdditionalAngle)
+                stringBuild.Append("," + CSV.Escape(maplexRotationProperties2.AlignmentType)); //RotationProperties (AlignmentType)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.SecondaryOffset)); //SecondaryOffset
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.SpreadCharacters)); //SpreadCharacters
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.SpreadWords)); //SpreadWords
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.ThinDuplicateLabels)); //ThinDuplicateLabels
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.ThinningDistance)); //ThinningDistance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.CanFlipStackedStreetLabel)); //CanFlipStackedStreetLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.CanPlaceLabelOnTopOfFeature)); //CanPlaceLabelOnTopOfFeature
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.CanReduceLeading)); //CanReduceLeading
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.ContourAlignmentType)); //ContourAlignmentType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.ContourLadderType)); //ContourLadderType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.ContourMaximumAngle)); //ContourMaximumAngle
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.EnablePolygonFixedPosition)); //EnablePolygonFixedPosition
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.EnableSecondaryOffset)); //EnableSecondaryOffset
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.GraticuleAlignmentType)); //GraticuleAlignmentType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsLabelBufferHardConstraint)); //IsLabelBufferHardConstraint
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsMinimumSizeBasedOnArea)); //IsMinimumSizeBasedOnArea
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsOffsetFromFeatureGeometry)); //IsOffsetFromFeatureGeometry
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.LineFeatureType)); //LineFeatureType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.MaximumLabelOverrunUnit)); //MaximumLabelOverrunUnit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.MinimumFeatureSizeUnit)); //MinimumFeatureSizeUnit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.PolygonAnchorPointType)); //PolygonAnchorPointType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexAboveLeft))); //PolygonExternalZones (Above Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexAboveCenter))); //PolygonExternalZones (Above Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexAboveRight))); //PolygonExternalZones (Above Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexCenterLeft))); //PolygonExternalZones (Center Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexCenter))); //PolygonExternalZones (Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexCenterRight))); //PolygonExternalZones (Center Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexBelowLeft))); //PolygonExternalZones (Below Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexBelowCenter))); //PolygonExternalZones (Below Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonExternalZones(esriMaplexZoneIdentifier.esriMaplexBelowRight))); //PolygonExternalZones (Below Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.PolygonFeatureType)); //PolygonFeatureType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexAboveLeft))); //PolygonInternalZones (Above Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexAboveCenter))); //PolygonInternalZones (Above Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexAboveRight))); //PolygonInternalZones (Above Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexCenterLeft))); //PolygonInternalZones (Center Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexCenter))); //PolygonInternalZones (Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexCenterRight))); //PolygonInternalZones (Center Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexBelowLeft))); //PolygonInternalZones (Below Left)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexBelowCenter))); //PolygonInternalZones (Below Center)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_PolygonInternalZones(esriMaplexZoneIdentifier.esriMaplexBelowRight))); //PolygonInternalZones (Below Right)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.RepetitionIntervalUnit)); //RepetitionIntervalUnit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.SecondaryOffsetMaximum)); //SecondaryOffsetMaximum
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.SecondaryOffsetMinimum)); //SecondaryOffsetMinimum
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyStacking))); //StrategyPriority (Stacking)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyOverrun))); //StrategyPriority (Overrun)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontCompression))); //StrategyPriority (Font Compression)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontReduction))); //StrategyPriority (Font Reduction)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyAbbreviation))); //StrategyPriority (Abbreviation)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.ThinningDistanceUnit)); //ThinningDistanceUnit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter3.AvoidPolygonHoles)); //AvoidPolygonHoles
+                stringBuild.Append("," + CSV.Escape(maplexOverposter3.BoundaryLabelingAllowHoles)); //BoundaryLabelingAllowHoles
+                stringBuild.Append("," + CSV.Escape(maplexOverposter3.BoundaryLabelingAllowSingleSided)); //BoundaryLabelingAllowSingleSided
+                stringBuild.Append("," + CSV.Escape(maplexOverposter3.BoundaryLabelingSingleSidedOnLine)); //BoundaryLabelingSingleSidedOnLine
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.AllowStraddleStacking)); //AllowStraddleStacking
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.CanKeyNumberLabel)); //CanKeyNumberLabel
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.ConnectionType)); //ConnectionType
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.EnableConnection)); //EnableConnection
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.KeyNumberGroupName)); //KeyNumberGroupName
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.LabelLargestPolygon)); //LabelLargestPolygon
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.MultiPartOption)); //MultiPartOption
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearJunction)); //PreferLabelNearJunction
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearJunctionClearance)); //PreferLabelNearJunctionClearance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearMapBorder)); //PreferLabelNearMapBorder
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearMapBorderClearance)); //PreferLabelNearMapBorderClearance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.RemoveExtraLineBreaks)); //RemoveExtraLineBreaks
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.RemoveExtraWhiteSpace)); //RemoveExtraWhiteSpace
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationMarkerCharacter)); //TruncationMarkerCharacter
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationMinimumLength)); //TruncationMinimumLength
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationPreferredCharacters)); //TruncationPreferredCharacters
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.UseExactSymbolOutline)); //UseExactSymbolOutline
                 #endregion
             }
 
