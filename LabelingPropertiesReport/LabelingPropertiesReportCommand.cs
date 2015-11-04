@@ -129,84 +129,6 @@ namespace LabelingPropertiesReport
                 stringBuild.Append("," + CSV.Escape(maplexOverposter4.RemoveExtraLineBreaks)); //RemoveExtraLineBreaks
                 stringBuild.Append("," + CSV.Escape(maplexOverposter4.RemoveExtraWhiteSpace)); //RemoveExtraWhiteSpace
 
-
-                //fitting strategy
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanStackLabel)); //Stack
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.StackJustification)); //Label stacking alignment)
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MaximumNumberOfLines)); //Label stacking max number of lines
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MaximumNumberOfCharsPerLine)); //Label stacking max chars per line
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MinimumNumberOfCharsPerLine)); //Label stacking min chars per line
-
-                IMaplexLabelStackingProperties stackingProps = maplexOverposter.LabelStackingProperties; //Label stacking character 1-5
-                for (int i = 0; i < 5; i++)
-                {
-                    string separatorPrint = "";
-                    bool splitForced = false, Visible = false, splitAfter = false;
-                    if (i < stackingProps.SeparatorCount)
-                    {
-                        string separator = "";
-                        stackingProps.QuerySeparator(i, out separator, out Visible, out splitForced, out splitAfter);
-                        separatorPrint = String.Format("U+{0:X4} ", Convert.ToUInt16(separator[0]));
-                        stringBuild.Append("," + CSV.Escape(separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter));
-                    }
-                    else //just print the remaining chars as nulls
-                    {
-                        separatorPrint = "null";
-                        stringBuild.Append("," + CSV.Escape(separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter));
-                    }
-                }
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanOverrunFeature)); //Overrun
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.MaximumLabelOverrun)); //Max label overrun
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.MaximumLabelOverrunUnit)); //Max label overrun unit
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.AllowAsymmetricOverrun)); //Allow asymmetric overrun
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanReduceFontSize)); //Reduce font size
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontHeightReductionLimit)); //Reduce font size lower limit
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontHeightReductionStep)); //Reduce font size by this interval
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontWidthReductionLimit)); //Compress font width lower limit
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontWidthReductionStep)); //Compress font width by this interval
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanAbbreviateLabel)); //Abbreviate
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.DictionaryName)); //Abbreviation dictionary
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanTruncateLabel)); //Truncate
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationMarkerCharacter)); //Truncation marker character
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationMinimumLength)); //Truncation min word length
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationPreferredCharacters)); //Truncation chars to remove
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.CanKeyNumberLabel)); //Allow key numbering
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.KeyNumberGroupName)); //Key numbering group name
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyStacking))); //Fitting strategy order for stacking
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyOverrun))); //Fitting strategy order for overrun
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontCompression))); //Fitting strategy order for font compression
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontReduction))); //Fitting strategy order for font reduction
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyAbbreviation))); //Fitting strategy order for abbreviation
-
-
-                //Label Density
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.ThinDuplicateLabels)); //Remove duplicate labels
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.ThinningDistance)); //Remove duplicate radius
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.ThinningDistanceUnit)); //Remove duplicate radius unit
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.RepeatLabel)); //Repeat label
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumRepetitionInterval)); //Repeat label interval
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.RepetitionIntervalUnit)); //Repeat label interval unit
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearMapBorder)); //Prefer repeated label near map border
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearMapBorderClearance)); //Prefer repeated label near map border clearance
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearJunction)); //Prefer repeated label near junction
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearJunctionClearance)); //Prefer repeated label near junction clearance
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelBuffer)); //Label buffer
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsLabelBufferHardConstraint)); //Label buffer hard constraint
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsMinimumSizeBasedOnArea)); //Min size based on area
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumSizeForLabeling)); //Min feature size
-                stringBuild.Append("," + CSV.Escape(maplexOverposter2.MinimumFeatureSizeUnit)); //Min feature size unit
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.ConnectionType)); //Line connection type
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.EnableConnection)); //Connect features
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.MultiPartOption)); //Unconnected line label multi-part option
-                stringBuild.Append("," + CSV.Escape(maplexOverposter4.LabelLargestPolygon)); //Label largest polygon feature part
-
-
-                //Conflict Resolution
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureWeight)); //Feature weight
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.PolygonBoundaryWeight)); //Polygon boundary feature weight
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.BackgroundLabel)); //Background label
-                stringBuild.Append("," + CSV.Escape(maplexOverposter.NeverRemoveLabel)); //Never remove
-
                 //Placement points
                 stringBuild.Append("," + CSV.Escape(maplexOverposter.PointPlacementMethod)); //Point placement method
                 stringBuild.Append("," + CSV.Escape(maplexOverposter4.UseExactSymbolOutline)); //Measure offset from exact symbol outline
@@ -299,7 +221,7 @@ namespace LabelingPropertiesReport
                 stringBuild.Append("," + CSV.Escape(maplexOverposter3.BoundaryLabelingSingleSidedOnLine)); //Center single-sided boundary labels on line
                 stringBuild.Append("," + CSV.Escape(maplexOverposter3.BoundaryLabelingAllowHoles)); //Allow boundary labeling of holes
 
-                //placement generic
+                //Placement generic
                 stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureType)); //Feature type
                 stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelPriority)); //Label priority
 
@@ -314,6 +236,82 @@ namespace LabelingPropertiesReport
                 stringBuild.Append("," + CSV.Escape(maplexOverposter.MaximumWordSpacing)); //MaximumWordSpacing
                 //stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureBuffer)); //FeatureBuffer  //Not used at this point
                 //stringBuild.Append("," + CSV.Escape(maplexOverposter.CanRemoveOverlappingLabel)); //CanRemoveOverlappingLabel  //Not used at this point
+
+                //Fitting strategy
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanStackLabel)); //Stack
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.StackJustification)); //Label stacking alignment)
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MaximumNumberOfLines)); //Label stacking max number of lines
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MaximumNumberOfCharsPerLine)); //Label stacking max chars per line
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelStackingProperties.MinimumNumberOfCharsPerLine)); //Label stacking min chars per line
+
+                IMaplexLabelStackingProperties stackingProps = maplexOverposter.LabelStackingProperties; //Label stacking character 1-5
+                for (int i = 0; i < 5; i++)
+                {
+                    string separatorPrint = "";
+                    bool splitForced = false, Visible = false, splitAfter = false;
+                    if (i < stackingProps.SeparatorCount)
+                    {
+                        string separator = "";
+                        stackingProps.QuerySeparator(i, out separator, out Visible, out splitForced, out splitAfter);
+                        separatorPrint = String.Format("U+{0:X4} ", Convert.ToUInt16(separator[0]));
+                        stringBuild.Append("," + CSV.Escape(separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter));
+                    }
+                    else //just print the remaining chars as nulls
+                    {
+                        separatorPrint = "null";
+                        stringBuild.Append("," + CSV.Escape(separatorPrint + "," + Visible + "," + splitForced + "," + splitAfter));
+                    }
+                }
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanOverrunFeature)); //Overrun
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MaximumLabelOverrun)); //Max label overrun
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.MaximumLabelOverrunUnit)); //Max label overrun unit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.AllowAsymmetricOverrun)); //Allow asymmetric overrun
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanReduceFontSize)); //Reduce font size
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontHeightReductionLimit)); //Reduce font size lower limit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontHeightReductionStep)); //Reduce font size by this interval
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontWidthReductionLimit)); //Compress font width lower limit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FontWidthReductionStep)); //Compress font width by this interval
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanAbbreviateLabel)); //Abbreviate
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.DictionaryName)); //Abbreviation dictionary
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.CanTruncateLabel)); //Truncate
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationMarkerCharacter)); //Truncation marker character
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationMinimumLength)); //Truncation min word length
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.TruncationPreferredCharacters)); //Truncation chars to remove
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.CanKeyNumberLabel)); //Allow key numbering
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.KeyNumberGroupName)); //Key numbering group name
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyStacking))); //Fitting strategy order for stacking
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyOverrun))); //Fitting strategy order for overrun
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontCompression))); //Fitting strategy order for font compression
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyFontReduction))); //Fitting strategy order for font reduction
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.get_StrategyPriority(esriMaplexStrategyIdentifier.esriMaplexStrategyAbbreviation))); //Fitting strategy order for abbreviation
+
+
+                //Label Density
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.ThinDuplicateLabels)); //Remove duplicate labels
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.ThinningDistance)); //Remove duplicate radius
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.ThinningDistanceUnit)); //Remove duplicate radius unit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.RepeatLabel)); //Repeat label
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumRepetitionInterval)); //Repeat label interval
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.RepetitionIntervalUnit)); //Repeat label interval unit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearMapBorder)); //Prefer repeated label near map border
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearMapBorderClearance)); //Prefer repeated label near map border clearance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearJunction)); //Prefer repeated label near junction
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.PreferLabelNearJunctionClearance)); //Prefer repeated label near junction clearance
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.LabelBuffer)); //Label buffer
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsLabelBufferHardConstraint)); //Label buffer hard constraint
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.IsMinimumSizeBasedOnArea)); //Min size based on area
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.MinimumSizeForLabeling)); //Min feature size
+                stringBuild.Append("," + CSV.Escape(maplexOverposter2.MinimumFeatureSizeUnit)); //Min feature size unit
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.ConnectionType)); //Line connection type
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.EnableConnection)); //Connect features
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.MultiPartOption)); //Unconnected line label multi-part option
+                stringBuild.Append("," + CSV.Escape(maplexOverposter4.LabelLargestPolygon)); //Label largest polygon feature part
+
+                //Conflict Resolution
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.FeatureWeight)); //Feature weight
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.PolygonBoundaryWeight)); //Polygon boundary feature weight
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.BackgroundLabel)); //Background label
+                stringBuild.Append("," + CSV.Escape(maplexOverposter.NeverRemoveLabel)); //Never remove
 
                 #endregion
             }
@@ -341,69 +339,6 @@ namespace LabelingPropertiesReport
             stringBuild.Append("," + "Use coded value description");
             stringBuild.Append("," + "Remove extra line breaks");
             stringBuild.Append("," + "Remove extra white space");
-
-            //fitting strategy
-            stringBuild.Append("," + "Stack");
-            stringBuild.Append("," + "Label stacking alignment");
-            stringBuild.Append("," + "Label stacking max number of lines");
-            stringBuild.Append("," + "Label stacking max chars per line");
-            stringBuild.Append("," + "Label stacking min chars per line");
-
-            stringBuild.Append("," + "Label stacking character 1");
-            stringBuild.Append("," + "Label stacking character 2");
-            stringBuild.Append("," + "Label stacking character 3");
-            stringBuild.Append("," + "Label stacking character 4");
-            stringBuild.Append("," + "Label stacking character 5");
-
-            stringBuild.Append("," + "Overrun");
-            stringBuild.Append("," + "Max label overrun");
-            stringBuild.Append("," + "Max label overrun unit");
-            stringBuild.Append("," + "Allow asymmetric overrun");
-            stringBuild.Append("," + "Reduce font size");
-            stringBuild.Append("," + "Reduce font size lower limit");
-            stringBuild.Append("," + "Reduce font size by this interval");
-            stringBuild.Append("," + "Compress font width lower limit");
-            stringBuild.Append("," + "Compress font width by this interval");
-            stringBuild.Append("," + "Abbreviate");
-            stringBuild.Append("," + "Abbreviation dictionary");
-            stringBuild.Append("," + "Truncate");
-            stringBuild.Append("," + "Truncation marker character");
-            stringBuild.Append("," + "Truncation min word length");
-            stringBuild.Append("," + "Truncation chars to remove");
-            stringBuild.Append("," + "Allow key numbering");
-            stringBuild.Append("," + "Key numbering group name");
-            stringBuild.Append("," + "Fitting strategy order for stacking");
-            stringBuild.Append("," + "Fitting strategy order for overrun");
-            stringBuild.Append("," + "Fitting strategy order for font compression");
-            stringBuild.Append("," + "Fitting strategy order for font reduction");
-            stringBuild.Append("," + "Fitting strategy order for abbreviation");
-
-            //Label density
-            stringBuild.Append("," + "Remove duplicate labels");
-            stringBuild.Append("," + "Remove duplicates radius");
-            stringBuild.Append("," + "Remove duplicates radius unit");
-            stringBuild.Append("," + "Repeat label");
-            stringBuild.Append("," + "Repeat label interval");
-            stringBuild.Append("," + "Repeat label interval unit");
-            stringBuild.Append("," + "Prefer repeated label near map border");
-            stringBuild.Append("," + "Prefer repeated label near map border clearance");
-            stringBuild.Append("," + "Prefer repeated label near junction");
-            stringBuild.Append("," + "Prefer repeated label near junction clearance:");
-            stringBuild.Append("," + "Label buffer");
-            stringBuild.Append("," + "Label buffer hard constraint");
-            stringBuild.Append("," + "Min size based on area");
-            stringBuild.Append("," + "Min feature size");
-            stringBuild.Append("," + "Min feature size unit");
-            stringBuild.Append("," + "Line connection type");
-            stringBuild.Append("," + "Connect features");
-            stringBuild.Append("," + "Unconnected line label multi-part option");
-            stringBuild.Append("," + "Label largest polygon feature part");
-
-            //Conflict Resolution
-            stringBuild.Append("," + "Feature weight");
-            stringBuild.Append("," + "Polygon boundary feature weight");
-            stringBuild.Append("," + "Background label");
-            stringBuild.Append("," + "Never remove");
 
             //Placement points
             stringBuild.Append("," + "Point placement method");
@@ -510,6 +445,69 @@ namespace LabelingPropertiesReport
             stringBuild.Append("," + "Max percentage for spreading words");
             //stringBuild.Append("," + "FeatureBuffer"); //Not used at this point
             //stringBuild.Append("," + "CanRemoveOverlappingLabel"); //Not used at this point
+
+            //Fitting strategy
+            stringBuild.Append("," + "Stack");
+            stringBuild.Append("," + "Label stacking alignment");
+            stringBuild.Append("," + "Label stacking max number of lines");
+            stringBuild.Append("," + "Label stacking max chars per line");
+            stringBuild.Append("," + "Label stacking min chars per line");
+
+            stringBuild.Append("," + "Label stacking character 1");
+            stringBuild.Append("," + "Label stacking character 2");
+            stringBuild.Append("," + "Label stacking character 3");
+            stringBuild.Append("," + "Label stacking character 4");
+            stringBuild.Append("," + "Label stacking character 5");
+
+            stringBuild.Append("," + "Overrun");
+            stringBuild.Append("," + "Max label overrun");
+            stringBuild.Append("," + "Max label overrun unit");
+            stringBuild.Append("," + "Allow asymmetric overrun");
+            stringBuild.Append("," + "Reduce font size");
+            stringBuild.Append("," + "Reduce font size lower limit");
+            stringBuild.Append("," + "Reduce font size by this interval");
+            stringBuild.Append("," + "Compress font width lower limit");
+            stringBuild.Append("," + "Compress font width by this interval");
+            stringBuild.Append("," + "Abbreviate");
+            stringBuild.Append("," + "Abbreviation dictionary");
+            stringBuild.Append("," + "Truncate");
+            stringBuild.Append("," + "Truncation marker character");
+            stringBuild.Append("," + "Truncation min word length");
+            stringBuild.Append("," + "Truncation chars to remove");
+            stringBuild.Append("," + "Allow key numbering");
+            stringBuild.Append("," + "Key numbering group name");
+            stringBuild.Append("," + "Fitting strategy order for stacking");
+            stringBuild.Append("," + "Fitting strategy order for overrun");
+            stringBuild.Append("," + "Fitting strategy order for font compression");
+            stringBuild.Append("," + "Fitting strategy order for font reduction");
+            stringBuild.Append("," + "Fitting strategy order for abbreviation");
+
+            //Label density
+            stringBuild.Append("," + "Remove duplicate labels");
+            stringBuild.Append("," + "Remove duplicates radius");
+            stringBuild.Append("," + "Remove duplicates radius unit");
+            stringBuild.Append("," + "Repeat label");
+            stringBuild.Append("," + "Repeat label interval");
+            stringBuild.Append("," + "Repeat label interval unit");
+            stringBuild.Append("," + "Prefer repeated label near map border");
+            stringBuild.Append("," + "Prefer repeated label near map border clearance");
+            stringBuild.Append("," + "Prefer repeated label near junction");
+            stringBuild.Append("," + "Prefer repeated label near junction clearance:");
+            stringBuild.Append("," + "Label buffer");
+            stringBuild.Append("," + "Label buffer hard constraint");
+            stringBuild.Append("," + "Min size based on area");
+            stringBuild.Append("," + "Min feature size");
+            stringBuild.Append("," + "Min feature size unit");
+            stringBuild.Append("," + "Line connection type");
+            stringBuild.Append("," + "Connect features");
+            stringBuild.Append("," + "Unconnected line label multi-part option");
+            stringBuild.Append("," + "Label largest polygon feature part");
+
+            //Conflict Resolution
+            stringBuild.Append("," + "Feature weight");
+            stringBuild.Append("," + "Polygon boundary feature weight");
+            stringBuild.Append("," + "Background label");
+            stringBuild.Append("," + "Never remove");
 
             #endregion
 
